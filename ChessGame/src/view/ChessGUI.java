@@ -17,12 +17,12 @@ import model.pieces.Piece;
 public class ChessGUI extends JFrame {
     /**
      * Altera o nível de dificuldade da IA (profundidade de busca).
-     * Aceita valores de 1 a 4.
+    * Aceita valores de 1 a 7.
      */
     public void setNivelDificuldade(int nivel) {
-        if (nivel < 1) nivel = 1;
-        if (nivel > 4) nivel = 4;
-        depthSpinner.setValue(nivel);
+    if (nivel < 1) nivel = 1;
+    if (nivel > 7) nivel = 7;
+    depthSpinner.setValue(nivel);
     }
     private static final long serialVersionUID = 1L; // evita warning de serialização
 
@@ -41,7 +41,7 @@ public class ChessGUI extends JFrame {
     private int temaAtual = 0;
     /**
      * Altera as cores do tabuleiro para um dos cinco temas disponíveis.
-     * @param tema índice de 0 a 4
+    * @param tema índice de 0 a 4
      */
     public void alterarCoresTabuleiro(int tema) {
         if (tema < 0 || tema >= TAB_TEMAS.length) return;
@@ -180,9 +180,9 @@ public class ChessGUI extends JFrame {
         pcAsBlack.setSelected(false);
 
         JMenu depthMenu = new JMenu("Profundidade IA");
-        depthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 4, 1));
-        depthSpinner.setToolTipText("Profundidade efetiva da IA (heurística não-minimax)");
-        depthMenu.add(depthSpinner);
+    depthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 7, 1));
+    depthSpinner.setToolTipText("Profundidade efetiva da IA (heurística não-minimax)");
+    depthMenu.add(depthSpinner);
 
         quitItem = new JMenuItem("Sair");
         quitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
@@ -216,7 +216,7 @@ public class ChessGUI extends JFrame {
 
         // Menu de dificuldade
         JMenu dificuldadeMenu = new JMenu("Dificuldade");
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 7; i++) {
             final int nivel = i;
             JMenuItem item = new JMenuItem("Nível " + i);
             item.addActionListener(e -> setNivelDificuldade(nivel));
@@ -240,7 +240,7 @@ public class ChessGUI extends JFrame {
         panel.add(new JLabel("Prof. IA:"));
         // >>> Fix da ambiguidade: força o construtor (int,int,int,int)
         int curDepth = ((Integer) depthSpinner.getValue()).intValue();
-        JSpinner sp = new JSpinner(new SpinnerNumberModel(curDepth, 1, 4, 1));
+    JSpinner sp = new JSpinner(new SpinnerNumberModel(curDepth, 1, 7, 1));
         sp.addChangeListener(e -> depthSpinner.setValue(sp.getValue()));
         panel.add(sp);
 
